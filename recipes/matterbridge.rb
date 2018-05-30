@@ -37,7 +37,7 @@ template '/etc/matterbridge.toml' do
     channels: node['mod_chat']['synced_channels'],
   )
 
-  notifies :restart, 'systemd_unit[matterbridge.service]', :delayed
+  notifies :restart, 'systemd_unit[matterbridge.service]', :delayed if ::File.exist?('/etc/systemd/system/matterbridge.service')
 end
 
 systemd_unit 'matterbridge.service' do

@@ -34,13 +34,13 @@ template '/etc/oragono/ircd.yaml' do
     motd_file_path: '/etc/oragono/ircd.motd',
   )
 
-  notifies :restart, 'systemd_unit[oragono.service]', :delayed
+  notifies :restart, 'systemd_unit[oragono.service]', :delayed if ::File.exist?('/etc/systemd/system/oracono.service')
 end
 
 template '/etc/oragono/ircd.motd' do
   source 'ircd.motd.erb'
 
-  notifies :restart, 'systemd_unit[oragono.service]', :delayed
+  notifies :restart, 'systemd_unit[oragono.service]', :delayed if ::File.exist?('/etc/systemd/system/oracono.service')
 end
 
 remote_file '/tmp/oragono.tar.gz' do
@@ -67,7 +67,7 @@ execute 'extract_oragono' do
   only_if { ::File.exist?('/tmp/oragono.tar.gz') }
   action :run
 
-  notifies :restart, 'systemd_unit[oragono.service]', :delayed
+  notifies :restart, 'systemd_unit[oragono.service]', :delayed if ::File.exist?('/etc/systemd/system/oracono.service')
 end
 
 execute 'oragono_initdb' do
@@ -80,7 +80,7 @@ execute 'oragono_initdb' do
 
   not_if { ::File.exist?('/tmp/oragono/ircd.db') }
 
-  notifies :restart, 'systemd_unit[oragono.service]', :delayed
+  notifies :restart, 'systemd_unit[oragono.service]', :delayed if ::File.exist?('/etc/systemd/system/oracono.service')
 end
 
 execute 'oragono_mkcerts' do
@@ -92,7 +92,7 @@ execute 'oragono_mkcerts' do
   action :run
 
   not_if { ::File.exist?('/etc/oragono/tls.key') }
-  notifies :restart, 'systemd_unit[oragono.service]', :delayed
+  notifies :restart, 'systemd_unit[oragono.service]', :delayed if ::File.exist?('/etc/systemd/system/oracono.service')
 end
 
 systemd_unit 'oragono.service' do
