@@ -5,6 +5,7 @@ default['mod_chat']['synced_channels'] = %w(
   dev
   botstuffs
 )
-default['mod_chat']['ignored_syncing_users'] = %w(bubbles kierra)
+default['mod_chat']['irc_bridge_username'] = 'kierra'
+default['mod_chat']['ignored_syncing_users'] = []
 default['mod_chat']['irc_server_passwd_hash'] = nil
 default['mod_chat']['slack_token'] = nil

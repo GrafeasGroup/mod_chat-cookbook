@@ -28,7 +28,8 @@ template '/etc/matterbridge.toml' do
     irc: {
       port: '6697',
       server_password: node['mod_chat']['irc_server_passwd_hash'],
-      ignored_users: node['mod_chat']['ignored_syncing_users'],
+      ignored_users: node['mod_chat']['ignored_syncing_users'] + [node['mod_chat']['irc_bridge_username']],
+      bridge_username: node['mod_chat']['irc_bridge_username'],
     },
     slack: {
       token: node['mod_chat']['slack_token'],

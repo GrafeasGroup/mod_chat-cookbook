@@ -9,7 +9,7 @@ RemoteNickFormat="[{PROTOCOL}] <{NICK}> "
 [irc]
   [irc.modchat]
   Server="127.0.0.1:<%= @irc[:port] %>"
-  Nick="blossom"
+  Nick="<%= @irc[:bridge_username] %>"
   Password="<%= @irc[:server_password] %>"
   Charset="utf-8"
   MessageSplit=true
