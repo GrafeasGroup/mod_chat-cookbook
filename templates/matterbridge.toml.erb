@@ -5,6 +5,7 @@ RemoteNickFormat="[{PROTOCOL}] <{NICK}> "
   [slack.modchat]
   Token="<%= @slack[:token] %>"
   PrefixMessagesWithNick=true
+  RemoteNickFormat=""
 
 [irc]
   [irc.modchat]
@@ -15,7 +16,7 @@ RemoteNickFormat="[{PROTOCOL}] <{NICK}> "
   MessageSplit=true
   IgnoreNicks="<%= @irc[:ignored_users].join(' ') %>"
 
-  RemoteNickFormat="[{PROTOCOL}] <{NOPINGNICK}> "
+  RemoteNickFormat="<{NICK}> "
   ShowTopicChange=true
   UseTLS=true
   SkipTLSVerify=true
