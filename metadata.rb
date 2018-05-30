@@ -4,7 +4,7 @@ maintainer_email 'opensource@thelonelyghost.com'
 license 'MIT'
 description 'Installs/Configures mod chat compatibility tools'
 long_description 'Installs/Configures mod chat compatibility tools'
-version '0.2.2'
+version '0.2.3'
 chef_version '>= 12.1' if respond_to?(:chef_version)
 issues_url 'https://github.com/GrafeasGroup/mod_chat-cookbook/issues'
 source_url 'https://github.com/GrafeasGroup/mod_chat-cookbook'
