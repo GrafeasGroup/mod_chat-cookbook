@@ -1,0 +1,28 @@
+---
+# vim: ft=yaml.eruby
+driver:
+  name: vagrant
+  linked_clone: true
+  network:
+    - ["forwarded_port", {guest: 6667, host: 6667, auto_correct: true}]
+    - ["forwarded_port", {guest: 6697, host: 6697, auto_correct: true}]
+
+provisioner:
+  name: chef_zero
+  always_update_cookbooks: true
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: centos-7
+
+suites:
+  - name: default
+    run_list:
+      - 'recipe[mod_chat::default]'
+    attributes:
+      mod_chat:
+        servername: 'irc.example.com'
+        slack_token: <%= ENV.fetch("SLACK_API_TOKEN") %>
+        irc_server_passwd_hash: <%= ENV.fetch("IRC_PASSWD_HASH") %>

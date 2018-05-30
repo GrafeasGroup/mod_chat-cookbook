@@ -1,0 +1,35 @@
+[general]
+RemoteNickFormat="[{PROTOCOL}] <{NICK}> "
+
+[slack]
+  [slack.modchat]
+  Token="<%= @slack[:token] %>"
+  PrefixMessagesWithNick=true
+
+[irc]
+  [irc.modchat]
+  Server="127.0.0.1:<%= @irc[:port] %>"
+  Nick="blossom"
+  Password="<%= @irc[:server_password] %>"
+  Charset="utf-8"
+  MessageSplit=true
+  IgnoreNicks="<%= @irc[:ignored_users].join(' ') %>"
+
+  RemoteNickFormat="[{PROTOCOL}] <{NOPINGNICK}> "
+  ShowTopicChange=true
+  UseTLS=true
+  SkipTLSVerify=true
+<% @channels.each do |channel| %>
+  
+[[gateway]]
+name="<%= channel %>-bridge"
+enable=true
+
+  [[gateway.inout]]
+  account="slack.modchat"
+  channel="<%= channel %>"
+
+  [[gateway.inout]]
+  account="irc.modchat"
+  channel="#<%= channel %>"
+<% end %>
